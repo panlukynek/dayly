@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DAYLY — tvůj osobní AI agent pro každý den. Pamatuje si, plánuje a postupně přebírá rutinu za tebe.">
+    <meta name="theme-color" content="#0e0a2e">
+    <title>DAYLY — Tvůj osobní AI agent pro každý den</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%234c1d95'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#top" class="logo">
+            <span class="logo-mark"></span>
+            <span class="logo-text">DAYLY</span>
+        </a>
+        <div class="nav-links">
+            <a href="#produkt">Produkt</a>
+            <a href="#den">Jak to funguje</a>
+            <a href="#technologie">Technologie</a>
+            <a href="#cena">Cena</a>
+            <a href="#roadmap">Roadmap</a>
+        </div>
+        <a href="#waitlist" class="nav-cta">Připojit se →</a>
+    </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+    <div class="hero-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <canvas id="stars" class="stars"></canvas>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div class="hero-inner">
+        <div class="hero-eyebrow reveal">
+            <span class="pulse-dot"></span>
+            <span>Verze 1.0 · Brzy v early access</span>
+        </div>
+
+        <h1 class="hero-title">
+            <span class="word reveal" style="--d:.05s">Tvůj</span>
+            <span class="word reveal" style="--d:.15s">osobní</span>
+            <span class="word reveal" style="--d:.25s">AI</span>
+            <span class="word reveal grad" style="--d:.35s">agent</span>
+            <br>
+            <span class="word reveal" style="--d:.45s">pro</span>
+            <span class="word reveal" style="--d:.55s">každý</span>
+            <span class="word reveal grad" style="--d:.65s">den.</span>
+        </h1>
+
+        <p class="hero-sub reveal" style="--d:.85s">
+            Nejen že ti připomene, co máš dělat —<br>
+            <span class="hero-sub-strong">časem to zařídí za tebe.</span>
+        </p>
+
+        <div class="hero-cta reveal" style="--d:1s">
+            <a href="#waitlist" class="btn btn-primary">
+                <span>Chci být první</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#produkt" class="btn btn-ghost">Co DAYLY umí</a>
+        </div>
+
+        <div class="hero-meta reveal" style="--d:1.15s">
+            <div class="meta-item"><strong>iOS</strong><span>Brzy</span></div>
+            <div class="meta-item"><strong>macOS</strong><span>Fáze 2</span></div>
+            <div class="meta-item"><strong>Privacy</strong><span>End-to-end</span></div>
+            <div class="meta-item"><strong>Made in EU</strong><span>2026</span></div>
+        </div>
+
+        <!-- Floating phone mock -->
+        <div class="phone-wrap reveal" style="--d:1.3s">
+            <div class="phone">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="brief-card">
+                        <div class="brief-head">
+                            <div>
+                                <div class="brief-date">Středa · 22. dubna</div>
+                                <div class="brief-greet">Dobré ráno, Marek 👋</div>
+                            </div>
+                            <div class="brief-time">07:00</div>
+                        </div>
+
+                        <div class="brief-section">
+                            <div class="brief-label">Tvůj den</div>
+                            <div class="brief-row"><span class="dot blue"></span>3 schůzky · 5 úkolů · 1 deadline</div>
+                            <div class="brief-row"><span class="dot purple"></span>Hluboká práce: 14:00 – 16:30</div>
+                        </div>
+
+                        <div class="brief-section highlight">
+                            <div class="brief-label">⚠ Upozornění</div>
+                            <div class="brief-text">Máš 3 schůzky a deadline projektu Aurora. Doporučuji posunout úkol „Faktura Novák" na zítra.</div>
+                        </div>
+
+                        <div class="brief-section">
+                            <div class="brief-label">Paměť mi říká</div>
+                            <div class="brief-text">Dnes je výročí smlouvy s klientem Vortex — možná čas na follow-up?</div>
+                        </div>
+
+                        <div class="brief-typing">
+                            <span></span><span></span><span></span>
+                            <em>DAYLY píše...</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating chips -->
+            <div class="float-chip chip-1">
+                <span class="chip-icon">🧠</span>
+                <div><strong>Paměť aktualizována</strong><small>+12 nových kontextů</small></div>
+            </div>
+            <div class="float-chip chip-2">
+                <span class="chip-icon">⚡</span>
+                <div><strong>Akce navržena</strong><small>Rezervovat doktora</small></div>
+            </div>
+            <div class="float-chip chip-3">
+                <span class="chip-icon">📅</span>
+                <div><strong>Kalendář sync</strong><small>Google · Apple</small></div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#vize" class="hero-scroll" aria-label="Posunout dolů">
+        <span></span>
+    </a>
+</header>
+
+<!-- ============ MARQUEE (trust strip) ============ -->
+<section class="marquee">
+    <div class="marquee-track">
+        <span>Notion</span><span>·</span>
+        <span>Gmail</span><span>·</span>
+        <span>Google Calendar</span><span>·</span>
+        <span>Apple Calendar</span><span>·</span>
+        <span>Stripe</span><span>·</span>
+        <span>Spotify</span><span>·</span>
+        <span>Obsidian</span><span>·</span>
+        <span>WhatsApp</span><span>·</span>
+        <span>Telegram</span><span>·</span>
+        <span>HomeKit</span><span>·</span>
+        <span>Outlook</span><span>·</span>
+        <!-- duplicate for infinite scroll -->
+        <span>Notion</span><span>·</span>
+        <span>Gmail</span><span>·</span>
+        <span>Google Calendar</span><span>·</span>
+        <span>Apple Calendar</span><span>·</span>
+        <span>Stripe</span><span>·</span>
+        <span>Spotify</span><span>·</span>
+        <span>Obsidian</span><span>·</span>
+        <span>WhatsApp</span><span>·</span>
+        <span>Telegram</span><span>·</span>
+        <span>HomeKit</span><span>·</span>
+        <span>Outlook</span><span>·</span>
+    </div>
+</section>
+
+<!-- ============ VIZE ============ -->
+<section class="section" id="vize">
+    <div class="container">
+        <div class="section-head reveal-up">
+            <div class="section-tag">01 · Vize</div>
+            <h2 class="section-title">
+                Většina AI ti říká <span class="strike">co máš dělat</span>.<br>
+                <span class="grad">DAYLY to časem začne dělat za tebe.</span>
+            </h2>
+            <p class="section-lead">
+                DAYLY je vrstva inteligence mezi tebou a světem. Není to další seznam úkolů ani chatbot bez paměti.
+                Je to agent, který tě každý den lépe poznává a postupně přebírá rutinu, abys měl prostor na to, co tě skutečně baví.
+            </p>
+        </div>
+
+        <div class="pillars">
+            <div class="pillar reveal-up">
+                <div class="pillar-num">01</div>
+                <h3>Hluboká paměť</h3>
+                <p>Pamatuje si návyky, cíle, vztahy, finance i zdraví. Ne jako jeden velký soubor, ale chytře — přes vektorovou databázi a RAG.</p>
+            </div>
+            <div class="pillar reveal-up" style="--d:.1s">
+                <div class="pillar-num">02</div>
+                <h3>Proaktivita</h3>
+                <p>Každé ráno brifink. Každý večer učení. Mezi tím připomínky, návrhy a varování — než si stihneš uvědomit, že je potřebuješ.</p>
+            </div>
+            <div class="pillar reveal-up" style="--d:.2s">
+                <div class="pillar-num">03</div>
+                <h3>Agentní akce</h3>
+                <p>Postupně přebírá rutinu — drafty emailů, rezervace, platby. S tvým povolením a pod tvou kontrolou. Vždy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PRODUKT — FEATURES ============ -->
+<section class="section section-dark" id="produkt">
+    <div class="container">
+        <div class="section-head reveal-up">
+            <div class="section-tag">02 · Produkt</div>
+            <h2 class="section-title">Pět vrstev, které z DAYLY dělají <span class="grad">víc než aplikaci.</span></h2>
+        </div>
+
+        <div class="features">
+            <!-- Feature 1: Ranní brifink -->
+            <article class="feature feature-large reveal-up">
+                <div class="feature-content">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><circle cx="12" cy="12" r="4" fill="currentColor" opacity=".3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div class="feature-tag">3.1 · WOW moment</div>
+                    <h3>Ranní brifink, který tě skutečně zná</h3>
+                    <p>Každé ráno v 7:00 dostaneš personalizovaný přehled dne. Kalendář, priority, varování i připomínky z dlouhodobé paměti — sestavené agentem, který ví, co máš teď nejvíc na talíři.</p>
+                    <ul class="feat-list">
+                        <li>Prioritizované úkoly podle kontextu</li>
+                        <li>Varování před rizikovými dny</li>
+                        <li>Připomínky z dlouhodobé paměti</li>
+                        <li>Počasí, doprava i Spotify playlist</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div class="brief-mock">
+                        <div class="brief-mock-time">07:00 · Ranní brifink</div>
+                        <div class="brief-mock-row"><span>📅</span> 3 schůzky — nejdůležitější s Jakubem v 10:00</div>
+                        <div class="brief-mock-row"><span>🎯</span> Priorita: dokončit pitch deck pro Vortex</div>
+                        <div class="brief-mock-row"><span>⚠️</span> Pozor: deadline faktury v 18:00</div>
+                        <div class="brief-mock-row"><span>💡</span> Tip: dnes je výročí smlouvy s klientem X</div>
+                        <div class="brief-mock-row"><span>☀️</span> 14°C, slunečno — kávu venku?</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Feature 2: Večerní zachytávání -->
+            <article class="feature reveal-up">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M12 2a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" fill="currentColor" opacity=".3"/><path d="M12 2a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zM5 11a7 7 0 0 0 14 0M12 18v4M8 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div class="feature-tag">3.2</div>
+                <h3>Večerní zachytávání</h3>
+                <p>Stačí říct, co se dnes stalo. Hlasem nebo textem. Agent z toho extrahuje kontext a uloží do paměti.</p>
+                <div class="voice-wave">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </article>
+
+            <!-- Feature 3: Memory -->
+            <article class="feature feature-accent reveal-up">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M9 2a3 3 0 0 0-3 3v1a3 3 0 0 0-3 3 3 3 0 0 0 1 5 3 3 0 0 0 0 4 3 3 0 0 0 3 4 3 3 0 0 0 5 0 3 3 0 0 0 5-1 3 3 0 0 0 1-4 3 3 0 0 0 1-5 3 3 0 0 0-3-3V5a3 3 0 0 0-3-3 3 3 0 0 0-4 0z" fill="currentColor" opacity=".25" stroke="currentColor" stroke-width="1.5"/></svg>
+                </div>
+                <div class="feature-tag">3.3 · Memory Layer</div>
+                <h3>Dlouhodobá paměť</h3>
+                <p>Vektorová databáze, RAG a tři vrstvy: krátkodobá, střednědobá, trvalá. Pamatuje si vše — ale chytře.</p>
+                <div class="mem-graph">
+                    <div class="mem-node mn-1">Klient X<span>vlákno</span></div>
+                    <div class="mem-node mn-2">Faktury<span>opakovaně</span></div>
+                    <div class="mem-node mn-3">Pitch<span>priorita</span></div>
+                    <div class="mem-node mn-4">Vortex<span>výročí</span></div>
+                    <svg class="mem-lines" viewBox="0 0 200 120">
+                        <line x1="100" y1="60" x2="30" y2="20" stroke="rgba(167,139,250,.4)" stroke-width="1"/>
+                        <line x1="100" y1="60" x2="170" y2="20" stroke="rgba(167,139,250,.4)" stroke-width="1"/>
+                        <line x1="100" y1="60" x2="30" y2="100" stroke="rgba(167,139,250,.4)" stroke-width="1"/>
+                        <line x1="100" y1="60" x2="170" y2="100" stroke="rgba(167,139,250,.4)" stroke-width="1"/>
+                        <circle cx="100" cy="60" r="6" fill="#a78bfa"/>
+                    </svg>
+                </div>
+            </article>
+
+            <!-- Feature 4: Agentní akce -->
+            <article class="feature reveal-up">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor" opacity=".3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="feature-tag">3.4</div>
+                <h3>Agent jedná za tebe</h3>
+                <p>Drafty emailů, návrhy rezervací, shrnutí schůzek. S povolením i autonomní platby a rezervace.</p>
+                <div class="action-list">
+                    <div class="action-row"><span class="check">✓</span>Připomínka faktury<em>Fáze 1</em></div>
+                    <div class="action-row"><span class="check">✓</span>Email draft<em>Fáze 2</em></div>
+                    <div class="action-row"><span class="check soon">○</span>Rezervace<em>Fáze 2</em></div>
+                    <div class="action-row"><span class="check soon">○</span>Autonomní platby<em>Fáze 3</em></div>
+                </div>
+            </article>
+
+            <!-- Feature 5: Konektory -->
+            <article class="feature feature-large reveal-up">
+                <div class="feature-content">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><circle cx="6" cy="6" r="3" fill="currentColor" opacity=".3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="18" r="3" fill="currentColor" opacity=".3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="6" r="3" fill="currentColor" opacity=".3" stroke="currentColor" stroke-width="2"/><path d="M9 6h6M18 9v6M6 9l9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div class="feature-tag">3.5</div>
+                    <h3>Konektory — agent s rukama</h3>
+                    <p>Knihovna integrací pro nejběžnější služby. Kalendář, mail, finance, poznámky, hlas, chytrá domácnost. DAYLY je propojuje do jednoho živého agenta.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="connector-grid">
+                        <div class="connector"><span>📅</span><b>Calendar</b></div>
+                        <div class="connector"><span>✉️</span><b>Gmail</b></div>
+                        <div class="connector"><span>💸</span><b>Stripe</b></div>
+                        <div class="connector"><span>📝</span><b>Notion</b></div>
+                        <div class="connector"><span>🎵</span><b>Spotify</b></div>
+                        <div class="connector"><span>🌤️</span><b>Počasí</b></div>
+                        <div class="connector"><span>💬</span><b>WhatsApp</b></div>
+                        <div class="connector"><span>🏠</span><b>HomeKit</b></div>
+                        <div class="connector dim"><span>+</span><b>další</b></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DEN S DAYLY ============ -->
+<section class="section" id="den">
+    <div class="container">
+        <div class="section-head reveal-up">
+            <div class="section-tag">03 · Jak vypadá den s DAYLY</div>
+            <h2 class="section-title">Od prvního <span class="grad">„Dobré ráno"</span> až po klidný večer.</h2>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-line"></div>
+
+            <div class="t-item reveal-left">
+                <div class="t-time">07:00</div>
+                <div class="t-card">
+                    <div class="t-icon">☀️</div>
+                    <h4>Ranní brifink</h4>
+                    <p>DAYLY vygeneruje přehled dne — priority, schůzky, upozornění a krátký kontext z paměti.</p>
+                </div>
+            </div>
+
+            <div class="t-item right reveal-right">
+                <div class="t-time">07:05</div>
+                <div class="t-card">
+                    <div class="t-icon">🎧</div>
+                    <h4>Hlasové čtení</h4>
+                    <p>Brifink si můžeš nechat přečíst, zatímco si vaříš kávu. Hands-free.</p>
+                </div>
+            </div>
+
+            <div class="t-item reveal-left">
+                <div class="t-time">09:30</div>
+                <div class="t-card">
+                    <div class="t-icon">🔔</div>
+                    <h4>Připomínka schůzky</h4>
+                    <p>„Za 30 minut máš schůzku s Jakubem — tady jsou poznámky z minula."</p>
+                </div>
+            </div>
+
+            <div class="t-item right reveal-right">
+                <div class="t-time">12:00</div>
+                <div class="t-card">
+                    <div class="t-icon">🎙️</div>
+                    <h4>Hlasová poznámka</h4>
+                    <p>„Musím zavolat Novákovi ohledně smlouvy." DAYLY zpracuje, uloží, naplánuje.</p>
+                </div>
+            </div>
+
+            <div class="t-item reveal-left">
+                <div class="t-time">15:00</div>
+                <div class="t-card">
+                    <div class="t-icon">⚡</div>
+                    <h4>Návrh akce</h4>
+                    <p>„Máš zavolat Novákovi — chceš, abych připravil draft emailu?"</p>
+                </div>
+            </div>
+
+            <div class="t-item right reveal-right">
+                <div class="t-time">20:00</div>
+                <div class="t-card">
+                    <div class="t-icon">🌙</div>
+                    <h4>Večerní check-in</h4>
+                    <p>Agent se zeptá, jak den proběhl. Z odpovědi se učí na zítra.</p>
+                </div>
+            </div>
+
+            <div class="t-item reveal-left">
+                <div class="t-time">20:05</div>
+                <div class="t-card">
+                    <div class="t-icon">🧠</div>
+                    <h4>Učení agenta</h4>
+                    <p>Kontext se uloží do paměti — zítřejší brifink bude o den přesnější.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TECHNOLOGIE / RAG ============ -->
+<section class="section section-dark" id="technologie">
+    <div class="container">
+        <div class="section-head reveal-up">
+            <div class="section-tag">04 · Technologie</div>
+            <h2 class="section-title">Paměť, která si pamatuje <span class="grad">chytře.</span></h2>
+            <p class="section-lead">
+                Většina AI chatbotů zapomíná po každém rozhovoru. DAYLY si pamatuje vše — ale neposílá tě jako jeden velký soubor pokaždé. Vektorová databáze + RAG vyberou jen to, co je teď relevantní.
+            </p>
+        </div>
+
+        <div class="rag-flow">
+            <div class="rag-step reveal-up">
+                <div class="rag-num">1</div>
+                <h4>Vstup</h4>
+                <p>Datum, kalendář, poslední zápisky.</p>
+            </div>
+            <div class="rag-arrow">→</div>
+            <div class="rag-step reveal-up" style="--d:.1s">
+                <div class="rag-num">2</div>
+                <h4>Vektorové vyhledávání</h4>
+                <p>Najde top 10–15 relevantních vzpomínek.</p>
+            </div>
+            <div class="rag-arrow">→</div>
+            <div class="rag-step reveal-up" style="--d:.2s">
+                <div class="rag-num">3</div>
+                <h4>Brifink</h4>
+                <p>AI použije jen relevantní kontext. Šetří tokeny.</p>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <div class="stack-item reveal-up">
+                <div class="stack-icon">📱</div>
+                <div class="stack-body">
+                    <strong>iOS · macOS</strong>
+                    <span>SwiftUI / Catalyst</span>
+                </div>
+            </div>
+            <div class="stack-item reveal-up" style="--d:.05s">
+                <div class="stack-icon">🗄️</div>
+                <div class="stack-body">
+                    <strong>Backend</strong>
+                    <span>Supabase / Firebase</span>
+                </div>
+            </div>
+            <div class="stack-item reveal-up" style="--d:.1s">
+                <div class="stack-icon">🧬</div>
+                <div class="stack-body">
+                    <strong>Memory</strong>
+                    <span>pgvector / Pinecone</span>
+                </div>
+            </div>
+            <div class="stack-item reveal-up" style="--d:.15s">
+                <div class="stack-icon">⚡</div>
+                <div class="stack-body">
+                    <strong>Fast AI</strong>
+                    <span>Claude Haiku / GPT-4o mini</span>
+                </div>
+            </div>
+            <div class="stack-item reveal-up" style="--d:.2s">
+                <div class="stack-icon">💎</div>
+                <div class="stack-body">
+                    <strong>Premium AI</strong>
+                    <span>Claude Sonnet / GPT-4o</span>
+                </div>
+            </div>
+            <div class="stack-item reveal-up" style="--d:.25s">
+                <div class="stack-icon">🔌</div>
+                <div class="stack-body">
+                    <strong>Konektory</strong>
+                    <span>MCP + REST API</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="privacy-card reveal-up">
+            <div class="privacy-icon">
+                <svg viewBox="0 0 24 24" fill="none" width="40" height="40"><path d="M12 2L4 6v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V6l-8-4z" fill="rgba(167,139,250,.2)" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+                <h3>Privacy-first od základu</h3>
+                <p>End-to-end šifrování. Plná kontrola — paměť kdykoliv zobrazíš, upravíš, smažeš. V budoucnu i lokální on-device běh. Tvá data zůstávají tvoje.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section" id="cena">
+    <div class="container">
+        <div class="section-head reveal-up">
+            <div class="section-tag">05 · Cena</div>
+            <h2 class="section-title">Jednoduše. <span class="grad">Bez překvapení.</span></h2>
+        </div>
+
+        <div class="plans">
+            <div class="plan reveal-up">
+                <div class="plan-name">Free</div>
+                <div class="plan-price"><span class="big">0 €</span><span class="per">/měsíc</span></div>
+                <p class="plan-desc">Vyzkoušej DAYLY bez závazků.</p>
+                <ul class="plan-list">
+                    <li>5 brifingů / měsíc</li>
+                    <li>Základní úkoly</li>
+                    <li>Paměť 30 dní</li>
+                    <li>1 konektor</li>
+                </ul>
+                <a href="#waitlist" class="btn btn-ghost full">Začít zdarma</a>
+            </div>
+
+            <div class="plan plan-featured reveal-up" style="--d:.1s">
+                <div class="plan-badge">Nejoblíbenější</div>
+                <div class="plan-name">Pro</div>
+                <div class="plan-price"><span class="big">9 €</span><span class="per">/měsíc</span></div>
+                <p class="plan-desc">Plný DAYLY pro každý den.</p>
+                <ul class="plan-list">
+                    <li>Neomezené brifingty</li>
+                    <li>Plná paměť bez limitu</li>
+                    <li>Všechny konektory</li>
+                    <li>Agentní akce</li>
+                    <li>Hlasový vstup</li>
+                </ul>
+                <a href="#waitlist" class="btn btn-primary full">Připojit se na waitlist</a>
+                <div class="plan-extra">nebo 79 € / rok — ušetříš 30 %</div>
+            </div>
+
+            <div class="plan reveal-up" style="--d:.2s">
+                <div class="plan-name">Teams<span class="soon">brzy</span></div>
+                <div class="plan-price"><span class="big">15 €</span><span class="per">/os. / měsíc</span></div>
+                <p class="plan-desc">Pro malé týmy a startupy.</p>
+                <ul class="plan-list">
+                    <li>Vše z Pro</li>
+                    <li>Sdílené projekty</li>
+                    <li>Týmový kontext</li>
+                    <li>Admin dashboard</li>
+                </ul>
+                <a href="#waitlist" class="btn btn-ghost full">Mít zájem</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section class="section section-dark" id="roadmap">
+    <div class="container">
+        <div class="section-head reveal-up">
+            <div class="section-tag">06 · Roadmap</div>
+            <h2 class="section-title">Od základu k <span class="grad">plně autonomnímu agentovi.</span></h2>
+        </div>
+
+        <div class="phases">
+            <div class="phase reveal-up">
+                <div class="phase-head">
+                    <div class="phase-num">Fáze 1</div>
+                    <div class="phase-when">měsíce 1–3</div>
+                </div>
+                <h3>Základ</h3>
+                <ul>
+                    <li><span class="dot p1"></span>Landing page + waitlist</li>
+                    <li><span class="dot p1"></span>iOS aplikace — brifink, zápisky</li>
+                    <li><span class="dot p1"></span>Google + Apple Calendar</li>
+                    <li><span class="dot p1"></span>Paměť 30 dní</li>
+                    <li><span class="dot p1"></span>Free + první Pro uživatelé</li>
+                </ul>
+            </div>
+
+            <div class="phase phase-active reveal-up" style="--d:.1s">
+                <div class="phase-head">
+                    <div class="phase-num">Fáze 2</div>
+                    <div class="phase-when">měsíce 4–8</div>
+                </div>
+                <h3>Agent</h3>
+                <ul>
+                    <li><span class="dot p2"></span>Agentní akce: drafty, návrhy</li>
+                    <li><span class="dot p2"></span>Konektory: Gmail, Stripe, Notion</li>
+                    <li><span class="dot p2"></span>Plná dlouhodobá paměť</li>
+                    <li><span class="dot p2"></span>Mac aplikace</li>
+                    <li><span class="dot p2"></span>Hlasový brifink</li>
+                </ul>
+            </div>
+
+            <div class="phase reveal-up" style="--d:.2s">
+                <div class="phase-head">
+                    <div class="phase-num">Fáze 3</div>
+                    <div class="phase-when">měsíce 9–18</div>
+                </div>
+                <h3>Autonomie</h3>
+                <ul>
+                    <li><span class="dot p3"></span>Autonomní rezervace, platby</li>
+                    <li><span class="dot p3"></span>On-device verze agenta</li>
+                    <li><span class="dot p3"></span>Teams plán</li>
+                    <li><span class="dot p3"></span>API pro vývojáře</li>
+                    <li><span class="dot p3"></span>Expanze na další trhy</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ COMPETITION ============ -->
+<section class="section" id="proc">
+    <div class="container">
+        <div class="section-head reveal-up">
+            <div class="section-tag">07 · Proč DAYLY</div>
+            <h2 class="section-title">Existují fragmenty. <span class="grad">DAYLY je celek.</span></h2>
+        </div>
+
+        <div class="comp-table reveal-up">
+            <div class="comp-row comp-head">
+                <div>Konkurent</div>
+                <div>Co umí</div>
+                <div>Co chybí</div>
+            </div>
+            <div class="comp-row">
+                <div class="comp-name">Notion AI</div>
+                <div>Poznámky + AI asistent</div>
+                <div class="muted">Žádná proaktivita ani paměť</div>
+            </div>
+            <div class="comp-row">
+                <div class="comp-name">Apple Intelligence</div>
+                <div>Systémová AI na iPhonu</div>
+                <div class="muted">Generická, nezná tvůj kontext</div>
+            </div>
+            <div class="comp-row">
+                <div class="comp-name">Reclaim.ai</div>
+                <div>AI plánování kalendáře</div>
+                <div class="muted">Pouze kalendář</div>
+            </div>
+            <div class="comp-row">
+                <div class="comp-name">ChatGPT</div>
+                <div>Obecný AI asistent</div>
+                <div class="muted">Zapomíná, není proaktivní</div>
+            </div>
+            <div class="comp-row">
+                <div class="comp-name">Todoist / Things</div>
+                <div>Seznamy úkolů</div>
+                <div class="muted">Pasivní — nic nezařídí</div>
+            </div>
+            <div class="comp-row comp-us">
+                <div class="comp-name"><span class="logo-mark sm"></span>DAYLY</div>
+                <div><strong>Paměť + proaktivita + agentní akce</strong></div>
+                <div class="grad">Privacy-first. Každodenní návyk.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ WAITLIST CTA ============ -->
+<section class="cta" id="waitlist">
+    <div class="cta-bg">
+        <div class="orb orb-cta"></div>
+    </div>
+    <div class="container">
+        <div class="cta-inner reveal-up">
+            <div class="section-tag">08 · Připoj se</div>
+            <h2 class="cta-title">
+                Buď mezi <span class="grad">prvními</span>, kdo svého<br>
+                osobního agenta poznají.
+            </h2>
+            <p class="cta-sub">Pošleme ti pozvánku na early access. Žádný spam — jen jeden email, až bude DAYLY připraven.</p>
+
+            <form class="cta-form" onsubmit="return handleWaitlist(event)">
+                <input type="email" placeholder="tvuj@email.cz" required>
+                <button type="submit" class="btn btn-primary">
+                    <span>Chci pozvánku</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </form>
+            <div class="cta-note" id="cta-note"></div>
+
+            <div class="cta-trust">
+                <div><strong>1 000+</strong><span>na waitlistu</span></div>
+                <div><strong>0 €</strong><span>start zdarma</span></div>
+                <div><strong>EU</strong><span>privacy by design</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#top" class="logo">
+                    <span class="logo-mark"></span>
+                    <span class="logo-text">DAYLY</span>
+                </a>
+                <p>Tvůj osobní AI agent pro každý den.<br>Made with care in EU · 2026.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Produkt</h5>
+                <a href="#produkt">Funkce</a>
+                <a href="#technologie">Technologie</a>
+                <a href="#cena">Cena</a>
+                <a href="#roadmap">Roadmap</a>
+            </div>
+            <div class="footer-col">
+                <h5>Společnost</h5>
+                <a href="#vize">Vize</a>
+                <a href="#proc">Proč DAYLY</a>
+                <a href="#waitlist">Waitlist</a>
+            </div>
+            <div class="footer-col">
+                <h5>Právní</h5>
+                <a href="#">Privacy</a>
+                <a href="#">Podmínky</a>
+                <a href="mailto:hello@dayly.app">hello@dayly.app</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 DAYLY · Confidential preview</span>
+            <span>v 1.0 — Duben 2026</span>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
