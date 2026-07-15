@@ -1,0 +1,66 @@
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.pillar {
+  padding: 2rem 1.75rem;
+  height: 100%;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  letter-spacing: 0.14em;
+}
+
+.pillarTitle {
+  font-size: var(--text-xl);
+  margin-top: 2.75rem;
+}
+
+.pillarText {
+  margin-top: 0.9rem;
+  color: var(--text-soft);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+}
+
+.pillarFoot {
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--ow-gray2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+}
+
+.quote {
+  margin-top: clamp(4rem, 8vw, 6rem);
+  max-width: 52rem;
+  margin-inline: auto;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: 1.4;
+  color: var(--text-soft);
+  text-wrap: balance;
+}
+
+.quote strong {
+  color: var(--text);
+  font-weight: 400;
+}
+
+@media (max-width: 860px) {
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .pillarTitle {
+    margin-top: 1.5rem;
+  }
+}

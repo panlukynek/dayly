@@ -1,0 +1,306 @@
+/* ============================================================
+   DAYLY — design system
+   Barevné schéma: oldworld.nvim (default variant)
+   https://github.com/dgox16/oldworld.nvim
+============================================================ */
+
+:root {
+  /* --- oldworld.nvim palette --- */
+  --ow-bg: #161617;
+  --ow-bg-dark: #131314;
+  --ow-fg: #c9c7cd;
+  --ow-subtext1: #b4b1ba;
+  --ow-subtext2: #9f9ca6;
+  --ow-subtext3: #8b8693;
+  --ow-subtext4: #6c6874;
+  --ow-black: #27272a;
+  --ow-gray0: #18181a;
+  --ow-gray1: #1b1b1c;
+  --ow-gray2: #2a2a2c;
+  --ow-gray3: #313134;
+  --ow-gray4: #3b3b3e;
+  --ow-gray5: #444448;
+  --ow-red: #ea83a5;
+  --ow-green: #90b99f;
+  --ow-yellow: #e6b99d;
+  --ow-purple: #aca1cf;
+  --ow-magenta: #e29eca;
+  --ow-orange: #f5a191;
+  --ow-blue: #92a2d5;
+  --ow-cyan: #85b5ba;
+
+  /* --- semantic tokens --- */
+  --bg: var(--ow-bg);
+  --bg-dark: var(--ow-bg-dark);
+  --text: var(--ow-fg);
+  --text-soft: var(--ow-subtext2);
+  --text-dim: var(--ow-subtext4);
+  --surface: var(--ow-gray0);
+  --surface-2: var(--ow-gray1);
+  --surface-3: var(--ow-gray2);
+  --line: var(--ow-gray3);
+  --line-strong: var(--ow-gray5);
+  --accent: var(--ow-purple);
+  --accent-2: var(--ow-blue);
+  --accent-3: var(--ow-cyan);
+  --ok: var(--ow-green);
+  --warn: var(--ow-yellow);
+  --danger: var(--ow-red);
+
+  /* --- typography --- */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  --text-hero: clamp(2.75rem, 1.6rem + 5.4vw, 6rem);
+
+  /* --- layout --- */
+  --container: 76rem;
+  --container-pad: clamp(1.25rem, 4vw, 2.5rem);
+  --section-gap: clamp(6rem, 12vh, 10rem);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--ow-gray4) var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 560;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img, svg, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ow-purple) 32%, transparent);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ow-blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============ shared primitives ============ */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  padding-block: var(--section-gap);
+  position: relative;
+}
+
+.section-tint {
+  background: var(--bg-dark);
+  border-block: 1px solid var(--ow-gray2);
+}
+
+/* mono uppercase label — "01 · Vize" */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.tag::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: var(--ow-gray5);
+}
+
+/* serif italic accent inside headlines */
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* muted pastel gradient text — used sparingly */
+.tinted {
+  background: linear-gradient(100deg, var(--ow-purple), var(--ow-blue) 55%, var(--ow-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.muted { color: var(--text-soft); }
+.dim { color: var(--text-dim); }
+
+/* ============ buttons ============ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 520;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.25s var(--ease-out),
+              border-color 0.25s var(--ease-out),
+              color 0.25s var(--ease-out),
+              transform 0.25s var(--ease-out);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-solid {
+  background: var(--text);
+  color: var(--ow-bg-dark);
+}
+
+.btn-solid:hover {
+  background: #ffffff;
+}
+
+.btn-ghost {
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  border-color: var(--ow-subtext4);
+  background: var(--surface-2);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ============ cards ============ */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--ow-gray2);
+  border-radius: var(--radius-md);
+  transition: border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--line);
+}
+
+/* ============ view transitions ============ */
+
+@media not (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root) {
+    animation: vt-out 0.28s var(--ease-out) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: vt-in 0.42s var(--ease-out) 0.06s both;
+  }
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* nav is persistent across pages — keep it out of the root transition */
+.site-nav {
+  view-transition-name: site-nav;
+}
+
+/* ============ reduced motion ============ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
