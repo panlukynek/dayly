@@ -1,0 +1,58 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.card {
+  padding: 2rem 1.75rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.badge {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--ow-gray3);
+  color: var(--text-dim);
+}
+
+.badgeNow {
+  color: var(--ow-green);
+  border-color: color-mix(in srgb, var(--ow-green) 35%, transparent);
+  background: color-mix(in srgb, var(--ow-green) 8%, transparent);
+}
+
+.title {
+  font-size: var(--text-lg);
+  margin-top: 1.5rem;
+}
+
+.text {
+  margin-top: 0.7rem;
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.foot {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ow-gray2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

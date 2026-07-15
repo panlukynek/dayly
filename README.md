@@ -1,64 +1,70 @@
-# DAYLY — Web Preview
+# DAYLY — web
 
-Animovaná upoutávka pro DAYLY (osobní AI agent pro každý den).
+Marketingový web pro DAYLY (osobní AI agent pro každý den). Druhá generace —
+přepsáno ze statického HTML na Next.js aplikaci s routingem.
 
-## Lokální spuštění
+Původní statická verze je zachovaná v [`legacy/`](legacy/).
 
-Stačí otevřít `index.html` v prohlížeči — žádný build step, žádné dependencies.
+## Stack
 
-Pokud potřebuješ lokální server (kvůli některým prohlížečovým restrikcím):
+| Vrstva          | Technologie                                              |
+| --------------- | -------------------------------------------------------- |
+| Runtime / PM    | [Bun](https://bun.sh)                                     |
+| Framework       | Next.js 15 (App Router, TypeScript)                       |
+| Animace (UI)    | [motion](https://motion.dev) — reveals, accordion, layout |
+| Animace (scroll)| GSAP + ScrollTrigger — timeline, pinned pipeline          |
+| Smooth scroll   | [Lenis](https://lenis.darkroom.engineering) napojený na GSAP ticker |
+| 3D              | Three.js — shader pole bodů v hero (bez react-three-fiber) |
+| Přechody stránek| [next-view-transitions](https://github.com/shuding/next-view-transitions) (View Transitions API) |
+| Styly           | CSS Modules + design tokens v `globals.css` — **žádný Tailwind** |
+| Fonty           | Geist Sans/Mono (balíček `geist`), Instrument Serif (`@fontsource`) — self-hosted |
+
+Barevné schéma: [oldworld.nvim](https://github.com/dgox16/oldworld.nvim)
+(default varianta). Kompletní paleta je v `src/app/globals.css` jako `--ow-*`
+proměnné; komponenty používají sémantické tokeny (`--bg`, `--text`, `--accent`, …).
+
+## Vývoj
 
 ```bash
-# Python 3
-python3 -m http.server 8000
-
-# nebo Node
-npx serve .
+bun install
+bun dev          # http://localhost:3000
 ```
 
-## Nasazení na GitHub Pages
-
-1. Vytvoř nový GitHub repozitář (např. `dayly-web`).
-2. Inicializuj a pushni:
-
-   ```bash
-   cd /Users/nexus/Desktop/Developer/DAYLY/DAYLYweb
-   git init
-   git add .
-   git commit -m "Initial DAYLY landing page"
-   git branch -M main
-   git remote add origin https://github.com/<uzivatel>/dayly-web.git
-   git push -u origin main
-   ```
-
-3. V GitHubu: **Settings → Pages → Source: `Deploy from a branch` → `main` / `/ (root)`**.
-4. Po pár vteřinách bude web na `https://<uzivatel>.github.io/dayly-web/`.
+```bash
+bun run build    # produkční build
+bun run start    # produkční server
+bun run typecheck
+```
 
 ## Struktura
 
 ```
-DAYLYweb/
-├── index.html      # všechny sekce
-├── styles.css      # design system + animace
-├── script.js       # scroll reveal, parallax, starfield, form
-└── README.md
+src/
+├── app/
+│   ├── layout.tsx          # ViewTransitions + Lenis provider + Nav/Footer
+│   ├── page.tsx            # domů (Three.js hero, timeline, …)
+│   ├── produkt/            # feature deep-dives
+│   ├── technologie/        # paměť, RAG pipeline (pinned), soukromí, stack
+│   ├── cena/               # plány, srovnání, FAQ
+│   ├── vize/               # manifest, principy, roadmapa
+│   ├── api/waitlist/       # POST endpoint pro waitlist
+│   └── globals.css         # design tokens + sdílené primitivy
+└── components/
+    ├── layout/             # Nav, Footer, Logo
+    ├── providers/          # SmoothScrolling (Lenis ⇄ ScrollTrigger)
+    ├── ui/                 # Reveal, SectionHead, Counter, PageHero, CTA, form
+    ├── three/              # HeroCanvas
+    ├── home/ produkt/ technologie/ cena/   # sekce jednotlivých stránek
 ```
 
-## Sekce
+## Poznámky k implementaci
 
-1. Hero — animované orby, starfield, floating phone mock, chips
-2. Marquee — pásmo integrací
-3. Vize — 3 pilíře
-4. Produkt — 5 funkcionalit
-5. Den s DAYLY — timeline s ranní → večerní rutinou
-6. Technologie — RAG flow + tech stack + privacy
-7. Cena — Free / Pro / Teams
-8. Roadmap — 3 fáze
-9. Konkurence — srovnávací tabulka
-10. CTA waitlist + footer
-
-## Customizace
-
-- **Barvy:** uprav CSS proměnné v `:root` v `styles.css`.
-- **Texty:** přímo v `index.html` (česky, ladí s PDF).
-- **Form backend:** `handleWaitlist()` v `script.js` — propoj na Mailchimp / ConvertKit / Supabase.
+- **Reduced motion** se respektuje všude: Lenis se nezapíná, GSAP animace
+  přeskočí (`gsap.matchMedia`), Three.js vyrenderuje jediný statický snímek,
+  motion reveals se vypnou.
+- **Three.js scéna** má DPR strop 2, pauzu mimo viewport a plný cleanup při
+  unmountu. Když WebGL není k dispozici, hero má CSS fallback pozadí.
+- **Waitlist**: `src/app/api/waitlist/route.ts` validuje e-mail; skutečné
+  uložení se napojuje v jediné funkci `saveToWaitlist` (Resend / Supabase / …).
+- **View transitions** fungují mezi všemi stránkami; navigace je vyjmutá
+  z root přechodu přes `view-transition-name: site-nav`.
