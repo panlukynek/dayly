@@ -1,0 +1,164 @@
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.sticky {
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+}
+
+.h2 {
+  font-size: var(--t-xl);
+  margin-top: 1rem;
+}
+
+.body {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.9rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+  max-width: 36rem;
+  text-wrap: pretty;
+}
+
+.body strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.body code {
+  font-size: 0.85em;
+  color: var(--text);
+}
+
+/* ---------- data table ---------- */
+
+.table {
+  border: 1px solid var(--line-mid);
+  font-size: var(--t-sm);
+}
+
+.tr {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1.6fr;
+  gap: 1.25rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--layer);
+  align-items: baseline;
+}
+
+.tr:last-child {
+  border-bottom: 0;
+}
+
+.trHead {
+  background: var(--bg-dark);
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.tdData {
+  font-weight: 500;
+}
+
+.tdHome {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--ow-blue);
+}
+
+.tdWhy {
+  color: var(--text-soft);
+}
+
+/* ---------- tools ---------- */
+
+.tools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.tool {
+  background: var(--layer);
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.toolName {
+  font-family: var(--mono);
+  font-size: var(--t-sm);
+}
+
+.toolDesc {
+  font-size: var(--t-sm);
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.toolBadge {
+  justify-self: start;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid;
+}
+
+.read {
+  color: var(--ow-green);
+  border-color: color-mix(in srgb, var(--ow-green) 40%, transparent);
+}
+
+.write {
+  color: var(--ow-yellow);
+  border-color: color-mix(in srgb, var(--ow-yellow) 40%, transparent);
+}
+
+.legend {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--text-dim);
+}
+
+.legend b {
+  font-weight: 400;
+}
+
+@media (max-width: 860px) {
+  .two {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky {
+    position: static;
+  }
+
+  .tr {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .trHead {
+    display: none;
+  }
+
+  .tools {
+    grid-template-columns: 1fr;
+  }
+}

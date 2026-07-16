@@ -1,0 +1,18 @@
+.head {
+  padding-block: calc(var(--nav-h) + clamp(4rem, 10vh, 7rem)) clamp(3rem, 7vh, 5rem);
+}
+
+.title {
+  font-size: var(--t-2xl);
+  margin-top: 1.25rem;
+  max-width: 22ch;
+}
+
+.lead {
+  margin-top: 1.5rem;
+  font-size: var(--t-lg);
+  color: var(--text-soft);
+  max-width: 46rem;
+  text-wrap: pretty;
+  line-height: 1.6;
+}
