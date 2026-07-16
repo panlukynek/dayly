@@ -1,11 +1,11 @@
 /* ============================================================
-   DAYLY — design system
-   Barevné schéma: oldworld.nvim (default variant)
-   https://github.com/dgox16/oldworld.nvim
+   Almanac — site design system
+   Structure after IBM Carbon; colour after oldworld.nvim.
+   Square corners. Hairlines. Plex everywhere.
 ============================================================ */
 
 :root {
-  /* --- oldworld.nvim palette --- */
+  /* --- oldworld.nvim (default variant) --- */
   --ow-bg: #161617;
   --ow-bg-dark: #131314;
   --ow-fg: #c9c7cd;
@@ -29,53 +29,49 @@
   --ow-blue: #92a2d5;
   --ow-cyan: #85b5ba;
 
-  /* --- semantic tokens --- */
+  /* --- semantic layers (Carbon-style surface model) --- */
   --bg: var(--ow-bg);
   --bg-dark: var(--ow-bg-dark);
+  --layer: var(--ow-gray0);
+  --layer-2: var(--ow-gray1);
+  --layer-3: var(--ow-gray2);
+  --line: var(--ow-gray2);
+  --line-mid: var(--ow-gray3);
+  --line-strong: var(--ow-gray5);
   --text: var(--ow-fg);
   --text-soft: var(--ow-subtext2);
   --text-dim: var(--ow-subtext4);
-  --surface: var(--ow-gray0);
-  --surface-2: var(--ow-gray1);
-  --surface-3: var(--ow-gray2);
-  --line: var(--ow-gray3);
-  --line-strong: var(--ow-gray5);
   --accent: var(--ow-purple);
-  --accent-2: var(--ow-blue);
-  --accent-3: var(--ow-cyan);
   --ok: var(--ow-green);
   --warn: var(--ow-yellow);
-  --danger: var(--ow-red);
+  --err: var(--ow-red);
 
-  /* --- typography --- */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  /* --- type --- */
+  --sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --serif: "IBM Plex Serif", ui-serif, Georgia, serif;
 
-  --text-xs: 0.8125rem;
-  --text-sm: 0.9375rem;
-  --text-md: 1.0625rem;
-  --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
-  --text-xl: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
-  --text-2xl: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
-  --text-hero: clamp(2.75rem, 1.6rem + 5.4vw, 6rem);
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-md: 1rem;
+  --t-lg: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --t-xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  --t-2xl: clamp(2.25rem, 1.4rem + 3.4vw, 4.25rem);
+  --t-hero: clamp(3rem, 1.5rem + 7vw, 7.5rem);
 
   /* --- layout --- */
-  --container: 76rem;
-  --container-pad: clamp(1.25rem, 4vw, 2.5rem);
-  --section-gap: clamp(6rem, 12vh, 10rem);
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
+  --shell: 84rem;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+  --gap: clamp(6rem, 14vh, 11rem);
+  --nav-h: 3.5rem;
 
+  --ease: cubic-bezier(0.2, 0, 0.1, 1); /* Carbon-ish productive motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   color-scheme: dark;
 }
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
@@ -88,30 +84,25 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-sans);
-  font-size: var(--text-md);
-  line-height: 1.6;
+  font-family: var(--sans);
+  font-size: var(--t-md);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   overflow-x: clip;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
   margin: 0;
-  font-weight: 560;
-  line-height: 1.12;
-  letter-spacing: -0.02em;
+  font-weight: 480;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
-p {
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+img, svg, canvas { display: block; max-width: 100%; }
 
 button {
   font: inherit;
@@ -122,174 +113,147 @@ button {
   cursor: pointer;
 }
 
-img, svg, canvas {
-  display: block;
-  max-width: 100%;
-}
-
-ul, ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+code, pre, kbd {
+  font-family: var(--mono);
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--ow-purple) 32%, transparent);
-  color: var(--text);
+  background: color-mix(in srgb, var(--ow-purple) 35%, transparent);
 }
 
 :focus-visible {
   outline: 2px solid var(--ow-blue);
-  outline-offset: 3px;
-  border-radius: 2px;
+  outline-offset: 2px;
 }
 
-/* ============ shared primitives ============ */
+/* ============ shell: centered column with side rails ============ */
 
-.container {
+.shell {
   width: 100%;
-  max-width: var(--container);
+  max-width: var(--shell);
   margin-inline: auto;
-  padding-inline: var(--container-pad);
+  padding-inline: var(--pad);
+}
+
+@media (min-width: 90rem) {
+  .shell-rails {
+    border-inline: 1px solid var(--line);
+  }
 }
 
 .section {
-  padding-block: var(--section-gap);
+  padding-block: var(--gap);
   position: relative;
 }
 
-.section-tint {
-  background: var(--bg-dark);
-  border-block: 1px solid var(--ow-gray2);
-}
+.hairline-top { border-top: 1px solid var(--line); }
+.tinted { background: var(--bg-dark); }
 
-/* mono uppercase label — "01 · Vize" */
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.14em;
+/* ============ type utilities ============ */
+
+/* mono metadata label — Carbon eyebrow, dev flavour */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  font-weight: 400;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-soft);
+  color: var(--text-dim);
 }
 
-.tag::before {
-  content: "";
-  width: 1.75rem;
-  height: 1px;
-  background: var(--ow-gray5);
+.eyebrow b {
+  font-weight: 400;
+  color: var(--accent);
 }
 
-/* serif italic accent inside headlines */
 .serif {
-  font-family: var(--font-serif);
+  font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 
-/* muted pastel gradient text — used sparingly */
-.tinted {
-  background: linear-gradient(100deg, var(--ow-purple), var(--ow-blue) 55%, var(--ow-cyan));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.muted { color: var(--text-soft); }
+.mono { font-family: var(--mono); }
+.soft { color: var(--text-soft); }
 .dim { color: var(--text-dim); }
 
-/* ============ buttons ============ */
+.accent-purple { color: var(--ow-purple); }
+.accent-blue { color: var(--ow-blue); }
+.accent-cyan { color: var(--ow-cyan); }
+.accent-green { color: var(--ow-green); }
+.accent-yellow { color: var(--ow-yellow); }
+.accent-red { color: var(--ow-red); }
+
+/* ============ buttons — square, Carbon-style ============ */
 
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 999px;
-  font-size: var(--text-sm);
-  font-weight: 520;
-  line-height: 1;
-  white-space: nowrap;
-  transition: background-color 0.25s var(--ease-out),
-              border-color 0.25s var(--ease-out),
-              color 0.25s var(--ease-out),
-              transform 0.25s var(--ease-out);
+  justify-content: space-between;
+  gap: 2.5rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.1rem;
+  font-family: var(--mono);
+  font-size: var(--t-sm);
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  transition: background-color 0.18s var(--ease), border-color 0.18s var(--ease),
+    color 0.18s var(--ease);
 }
 
-.btn:active {
-  transform: scale(0.97);
+.btn::after {
+  content: "→";
+  font-family: var(--mono);
 }
 
-.btn-solid {
-  background: var(--text);
-  color: var(--ow-bg-dark);
+.btn-primary {
+  background: var(--ow-purple);
+  color: var(--bg-dark);
 }
 
-.btn-solid:hover {
-  background: #ffffff;
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--ow-purple) 82%, white);
 }
 
 .btn-ghost {
-  border: 1px solid var(--line-strong);
+  border-color: var(--line-strong);
   color: var(--text);
-  background: transparent;
 }
 
 .btn-ghost:hover {
-  border-color: var(--ow-subtext4);
-  background: var(--surface-2);
+  border-color: var(--ow-subtext3);
+  background: var(--layer);
 }
 
-.btn-block {
-  width: 100%;
+/* ============ inline code chip ============ */
+
+.chip {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--layer-2);
+  border: 1px solid var(--line);
+  padding: 0.1em 0.45em;
+  white-space: nowrap;
 }
 
-/* ============ cards ============ */
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--ow-gray2);
-  border-radius: var(--radius-md);
-  transition: border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
-}
-
-.card:hover {
-  border-color: var(--line);
-}
-
-/* ============ view transitions ============ */
+/* ============ view transitions (fast crossfade only) ============ */
 
 @media not (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root) {
-    animation: vt-out 0.28s var(--ease-out) both;
+  ::view-transition-old(page) {
+    animation: vt-out 0.14s var(--ease) both;
   }
 
-  ::view-transition-new(root) {
-    animation: vt-in 0.42s var(--ease-out) 0.06s both;
+  ::view-transition-new(page) {
+    animation: vt-in 0.18s var(--ease) both;
   }
 }
 
 @keyframes vt-out {
-  to {
-    opacity: 0;
-    transform: translateY(-14px);
-  }
+  to { opacity: 0; }
 }
 
 @keyframes vt-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-}
-
-/* nav is persistent across pages — keep it out of the root transition */
-.site-nav {
-  view-transition-name: site-nav;
+  from { opacity: 0; }
 }
 
 /* ============ reduced motion ============ */

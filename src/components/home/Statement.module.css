@@ -1,0 +1,32 @@
+.section {
+  padding-block: var(--gap);
+  border-top: 1px solid var(--line);
+}
+
+.text {
+  font-size: var(--t-2xl);
+  font-weight: 450;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  max-width: 60rem;
+  text-wrap: pretty;
+}
+
+.text .word {
+  display: inline-block;
+}
+
+.foot {
+  margin-top: 3rem;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--text-dim);
+}
+
+.foot span b {
+  font-weight: 400;
+  color: var(--text-soft);
+}

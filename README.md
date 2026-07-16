@@ -1,70 +1,69 @@
-# DAYLY — web
+# almanac — site
 
-Marketingový web pro DAYLY (osobní AI agent pro každý den). Druhá generace —
-přepsáno ze statického HTML na Next.js aplikaci s routingem.
+Marketing/docs site for [Almanac](https://github.com/panlukynek/tomasi-kafe),
+a calm, local-first workspace (calendar + tasks + Obsidian vault + an
+assistant that can actually read your notes). Written for people who read
+source code, not for investors: the CTA is a `git clone`.
 
-Původní statická verze je zachovaná v [`legacy/`](legacy/).
+The previous iterations of this repo (a static Czech landing page and its
+routed Next.js port for "DAYLY") live on in `legacy/` and git history.
 
 ## Stack
 
-| Vrstva          | Technologie                                              |
-| --------------- | -------------------------------------------------------- |
-| Runtime / PM    | [Bun](https://bun.sh)                                     |
-| Framework       | Next.js 15 (App Router, TypeScript)                       |
-| Animace (UI)    | [motion](https://motion.dev) — reveals, accordion, layout |
-| Animace (scroll)| GSAP + ScrollTrigger — timeline, pinned pipeline          |
-| Smooth scroll   | [Lenis](https://lenis.darkroom.engineering) napojený na GSAP ticker |
-| 3D              | Three.js — shader pole bodů v hero (bez react-three-fiber) |
-| Přechody stránek| [next-view-transitions](https://github.com/shuding/next-view-transitions) (View Transitions API) |
-| Styly           | CSS Modules + design tokens v `globals.css` — **žádný Tailwind** |
-| Fonty           | Geist Sans/Mono (balíček `geist`), Instrument Serif (`@fontsource`) — self-hosted |
+| Layer        | Choice                                                            |
+| ------------ | ----------------------------------------------------------------- |
+| Runtime / PM | [Bun](https://bun.sh)                                              |
+| Framework    | Next.js **16.2.10** (App Router, TypeScript)                       |
+| Transitions  | First-party View Transitions (`experimental.viewTransition`) — no extra dependency |
+| Scroll       | [Lenis](https://lenis.darkroom.engineering) pumped by the GSAP ticker |
+| Choreography | GSAP + ScrollTrigger, SplitText, DrawSVG (free since 3.13); `motion` for small in-view reveals |
+| 3D           | three.js — ~5k shader points morphing cloud → grid with scroll     |
+| Styling      | CSS Modules over custom properties — **no Tailwind**               |
+| Type         | IBM Plex Sans / Mono / Serif via `@fontsource` (self-hosted)       |
+| Colour       | [oldworld.nvim](https://github.com/dgox16/oldworld.nvim), default variant, verbatim |
 
-Barevné schéma: [oldworld.nvim](https://github.com/dgox16/oldworld.nvim)
-(default varianta). Kompletní paleta je v `src/app/globals.css` jako `--ow-*`
-proměnné; komponenty používají sémantické tokeny (`--bg`, `--text`, `--accent`, …).
+### Supply-chain note (July 2026)
 
-## Vývoj
+Versions were picked after checking this year's npm incidents (axios 1.14.1
+backdoor, the TanStack compromise, node-ipc, the phantom-gyp/binding.gyp
+worm). None of the dependencies here appear on the affected lists, and
+Next 16.2.10 postdates Vercel's May 2026 coordinated security release.
+The lockfile is committed; trust it over the ranges.
+
+## Develop
 
 ```bash
 bun install
 bun dev          # http://localhost:3000
-```
-
-```bash
-bun run build    # produkční build
-bun run start    # produkční server
+bun run build && bun run start
 bun run typecheck
 ```
 
-## Struktura
+## Pages
 
-```
-src/
-├── app/
-│   ├── layout.tsx          # ViewTransitions + Lenis provider + Nav/Footer
-│   ├── page.tsx            # domů (Three.js hero, timeline, …)
-│   ├── produkt/            # feature deep-dives
-│   ├── technologie/        # paměť, RAG pipeline (pinned), soukromí, stack
-│   ├── cena/               # plány, srovnání, FAQ
-│   ├── vize/               # manifest, principy, roadmapa
-│   ├── api/waitlist/       # POST endpoint pro waitlist
-│   └── globals.css         # design tokens + sdílené primitivy
-└── components/
-    ├── layout/             # Nav, Footer, Logo
-    ├── providers/          # SmoothScrolling (Lenis ⇄ ScrollTrigger)
-    ├── ui/                 # Reveal, SectionHead, Counter, PageHero, CTA, form
-    ├── three/              # HeroCanvas
-    ├── home/ produkt/ technologie/ cena/   # sekce jednotlivých stránek
-```
+- `/` — the scrollytelling pitch: three.js hero (scroll orders the chaos),
+  scrub-brightened manifesto, pinned horizontal tour of the six app screens,
+  "everything is a file" pin, and a pinned replay of one assistant exchange —
+  chat on the left, raw SSE events on the right, scrubbed together.
+- `/how-it-works` — architecture: the permission broker drawn with DrawSVG,
+  where data lives, `safeResolve`, the nine tools (read free / write gated),
+  pluggable providers.
+- `/manual` — clone → install → optional key → run; pointing it at a vault;
+  a Q&A of questions people actually ask.
+- `/colophon` — the palette as click-to-copy swatches, the Plex specimen,
+  Carbon structure notes, and what this site runs on.
 
-## Poznámky k implementaci
+## Implementation notes
 
-- **Reduced motion** se respektuje všude: Lenis se nezapíná, GSAP animace
-  přeskočí (`gsap.matchMedia`), Three.js vyrenderuje jediný statický snímek,
-  motion reveals se vypnou.
-- **Three.js scéna** má DPR strop 2, pauzu mimo viewport a plný cleanup při
-  unmountu. Když WebGL není k dispozici, hero má CSS fallback pozadí.
-- **Waitlist**: `src/app/api/waitlist/route.ts` validuje e-mail; skutečné
-  uložení se napojuje v jediné funkci `saveToWaitlist` (Resend / Supabase / …).
-- **View transitions** fungují mezi všemi stránkami; navigace je vyjmutá
-  z root přechodu přes `view-transition-name: site-nav`.
+- **Lenis** is instantiated manually inside the same effect that registers
+  the GSAP ticker callback (`src/components/SmoothScroll.tsx`). The previous
+  `<ReactLenis autoRaf={false}>` setup could end up with nothing pumping
+  `lenis.raf()`, which eats wheel events without scrolling — the bug this
+  rewrite fixes.
+- **View transitions** use React's `<ViewTransition>` from the canary React
+  vendored by Next 16 (`src/components/PageTransition.tsx`), with a fast
+  0.14/0.18s crossfade — no translate, nothing expensive to rasterize.
+- **Reduced motion** disables Lenis, all pins/scrubs/splits, and the particle
+  loop (single static frame). The content reads complete without animation.
+- Every GSAP piece cleans up via `gsap.matchMedia()` / killed triggers;
+  the three.js scene disposes geometry, material and context on unmount.

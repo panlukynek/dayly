@@ -1,0 +1,117 @@
+.section {
+  border-top: 1px solid var(--line);
+}
+
+.pin {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(3rem, 6vh, 5rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: var(--t-xl);
+  margin-top: 1rem;
+}
+
+.steps {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  padding-block: 1.4rem;
+  border-bottom: 1px solid var(--line);
+  opacity: 0.35;
+  transition: opacity 0.35s var(--ease);
+}
+
+.stepActive {
+  opacity: 1;
+}
+
+.stepNum {
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--text-dim);
+  padding-top: 0.3rem;
+}
+
+.stepActive .stepNum {
+  color: var(--accent);
+}
+
+.stepTitle {
+  font-size: var(--t-md);
+  font-weight: 500;
+}
+
+.stepText {
+  margin-top: 0.4rem;
+  font-size: var(--t-sm);
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.panels {
+  position: relative;
+  min-height: 24rem;
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+}
+
+.panel:first-child {
+  position: relative;
+}
+
+.panel pre {
+  margin: 0;
+}
+
+.tickWrap {
+  position: relative;
+  display: inline-block;
+  width: 1ch;
+}
+
+.tickOn {
+  position: absolute;
+  inset: 0;
+  color: var(--ow-green);
+  opacity: 0;
+}
+
+@media (max-width: 860px) {
+  .pin {
+    min-height: 0;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panels {
+    min-height: 0;
+  }
+
+  .panel {
+    position: relative;
+    margin-bottom: 1rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}

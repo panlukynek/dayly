@@ -1,0 +1,58 @@
+.footer {
+  border-top: 1px solid var(--line);
+  background: var(--bg-dark);
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--text-dim);
+}
+
+.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-block: 2.25rem;
+}
+
+.creed {
+  letter-spacing: 0.04em;
+}
+
+.creed i {
+  font-style: normal;
+  color: var(--ow-gray5);
+  padding-inline: 0.6em;
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.links a {
+  color: var(--text-soft);
+  transition: color 0.18s var(--ease);
+}
+
+.links a:hover {
+  color: var(--text);
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-block: 1.25rem 1.5rem;
+}
+
+.bottom a {
+  color: var(--text-soft);
+}
+
+.bottom a:hover {
+  color: var(--text);
+}

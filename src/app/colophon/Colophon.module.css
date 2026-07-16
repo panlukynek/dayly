@@ -1,0 +1,192 @@
+.h2 {
+  font-size: var(--t-xl);
+  margin-top: 1rem;
+}
+
+.body {
+  margin-top: 1.1rem;
+  display: grid;
+  gap: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+  max-width: 40rem;
+  text-wrap: pretty;
+}
+
+.body strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---------- type specimen ---------- */
+
+.specimens {
+  margin-top: 2.5rem;
+  border: 1px solid var(--line-mid);
+}
+
+.specimen {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--layer);
+  align-items: baseline;
+}
+
+.specimen:last-child {
+  border-bottom: 0;
+}
+
+.specLabel {
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.specLabel b {
+  color: var(--text-soft);
+  font-weight: 400;
+}
+
+.specSans {
+  font-size: var(--t-xl);
+  letter-spacing: -0.02em;
+}
+
+.specSerif {
+  font-family: var(--serif);
+  font-size: var(--t-xl);
+}
+
+.specMono {
+  font-family: var(--mono);
+  font-size: var(--t-md);
+  color: var(--text-soft);
+}
+
+/* ---------- structure demos ---------- */
+
+.demos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 2.5rem;
+}
+
+.demo {
+  background: var(--layer);
+  padding: 1.5rem;
+  min-height: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demoLabel {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.demoBox {
+  flex: 1;
+  border: 1px solid var(--line-strong);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--text-soft);
+}
+
+.demoLayers {
+  flex: 1;
+  position: relative;
+}
+
+.demoLayers i {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line-mid);
+}
+
+.demoLayers i:nth-child(1) { background: var(--bg); }
+.demoLayers i:nth-child(2) { background: var(--layer); inset: 0.7rem 0.7rem -0.35rem -0.35rem; }
+.demoLayers i:nth-child(3) { background: var(--layer-2); inset: 1.4rem 1.4rem -0.7rem -0.7rem; }
+
+/* ---------- site stack ---------- */
+
+.stack {
+  margin-top: 2.5rem;
+  border: 1px solid var(--line-mid);
+  font-size: var(--t-sm);
+}
+
+.stackRow {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.5rem;
+  padding: 1rem 1.4rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--layer);
+}
+
+.stackRow:last-child {
+  border-bottom: 0;
+}
+
+.stackKey {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--ow-blue);
+}
+
+.stackVal {
+  color: var(--text-soft);
+}
+
+.stackVal b {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.note {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--ow-green) 30%, transparent);
+  background: color-mix(in srgb, var(--ow-green) 5%, transparent);
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--text-soft);
+  line-height: 1.8;
+  max-width: 100%;
+}
+
+.note b {
+  color: var(--ow-green);
+  font-weight: 400;
+}
+
+@media (max-width: 860px) {
+  .specimen {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .demos {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stackRow {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}

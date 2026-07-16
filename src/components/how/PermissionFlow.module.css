@@ -1,0 +1,56 @@
+.wrap {
+  border: 1px solid var(--line-mid);
+  background: var(--bg-dark);
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  font-family: var(--mono);
+}
+
+.path {
+  stroke: var(--ow-purple);
+  stroke-width: 1.5;
+  fill: none;
+  opacity: 0.75;
+}
+
+.node rect {
+  fill: var(--ow-gray0);
+  stroke: var(--ow-gray4);
+  transition: stroke 0.3s var(--ease);
+}
+
+.node text {
+  fill: var(--ow-subtext2);
+  font-size: 13px;
+  transition: fill 0.3s var(--ease);
+}
+
+.node .sub {
+  fill: var(--ow-subtext4);
+  font-size: 11px;
+}
+
+.nodeActive rect {
+  stroke: var(--ow-purple);
+}
+
+.nodeActive text {
+  fill: var(--ow-fg);
+}
+
+.nodeActive .sub {
+  fill: var(--ow-subtext3);
+}
+
+.dim .node {
+  opacity: 0.45;
+  transition: opacity 0.3s var(--ease);
+}
+
+.dim .nodeActive {
+  opacity: 1;
+}
